@@ -1,0 +1,11 @@
+# Normalizuj końce linii w plikach tekstowych, traktuj media jako binarne
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary
+*.mp4 binary
+*.woff binary
+*.woff2 binary

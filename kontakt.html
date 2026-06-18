@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kontakt | Moto Wektor — Bielsko-Biała</title>
+<meta name="description" content="Skontaktuj się z Moto Wektor — producentem zabudów dostawczych z Bielska-Białej. Telefon, e-mail i formularz zapytania o wycenę.">
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div class="utilbar">
+  <div class="utilbar__inner">
+    <div class="utilbar__contact">
+      <a href="tel:+48334832081"><strong>+48 33 483 20 81</strong></a>
+      <a href="tel:+48602409830">Dział handlowy: +48 602 409 830</a>
+      <a href="mailto:biuro@motowektor.pl">biuro@motowektor.pl</a>
+    </div>
+    <div class="utilbar__hours">ul. Poligonowa 35, Bielsko-Biała · Pon–Pt 8:00–16:00</div>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="nav__inner">
+    <a class="nav__logo" href="index.html" aria-label="Moto Wektor"><svg class="brand__logo" viewBox="0 0 312 64" aria-hidden="true"><circle cx="31" cy="32" r="29" fill="#f7a30f"/><text x="31" y="42" text-anchor="middle" font-family="Hanken Grotesk, Arial, sans-serif" font-weight="900" font-size="29" fill="#fff">MW</text><text x="70" y="42" font-family="Hanken Grotesk, Arial, sans-serif" font-weight="800" font-size="27" letter-spacing="-0.4"><tspan fill="#f7a30f">MOTO</tspan><tspan fill="currentColor" dx="6">WEKTOR</tspan></text></svg></a>
+    <nav class="nav__menu" aria-label="Główna nawigacja"><a href="oferta.html">Zabudowy</a><a href="realizacje.html">Realizacje</a><a href="konfigurator.html">Konfigurator</a><a href="o-firmie.html">O nas</a><a href="kontakt.html" aria-current="page">Kontakt</a></nav>
+    <a class="nav__cta" href="kontakt.html">Zapytaj o wycenę</a>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu"><button class="mobile-menu__close" aria-label="Zamknij menu"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button><nav aria-label="Menu mobilne"><a href="oferta.html">Zabudowy</a><a href="realizacje.html">Realizacje</a><a href="konfigurator.html">Konfigurator</a><a href="o-firmie.html">O nas</a><a href="kontakt.html">Kontakt</a></nav></div>
+
+<main>
+<section class="page-intro">
+  <div class="crumb"><a href="index.html">Start</a> › Kontakt</div>
+  <h1>Porozmawiajmy o zabudowie</h1>
+  <p>Zadzwoń lub wyślij zapytanie. Im więcej napiszesz o podwoziu i ładunku, tym szybciej przygotujemy wycenę.</p>
+</section>
+
+<section class="panel panel--white" style="padding-top:0">
+  <div class="info-grid" data-reveal-stagger>
+    <div class="info-card"><h3>Telefon</h3><a href="tel:+48334832081">+48 33 483 20 81</a><a href="tel:+48602409830">+48 602 409 830</a><span>Dział handlowy</span></div>
+    <div class="info-card"><h3>E-mail</h3><a href="mailto:biuro@motowektor.pl">biuro@motowektor.pl</a></div>
+    <div class="info-card"><h3>Adres</h3><p>ul. Poligonowa 35</p><p>43-300 Bielsko-Biała</p></div>
+    <div class="info-card"><h3>Godziny</h3><p>Handlowy: pon–pt 8:00–16:00</p><p>Serwis: pon–pt 7:00–15:00</p></div>
+    <div class="info-card"><h3>Firma</h3><p>Moto Wektor Sp. z o.o.</p><span>NIP 553-242-04-03 · REGON 240936974</span></div>
+  </div>
+</section>
+
+<section class="panel panel--white" style="padding-top:clamp(1.6rem,3vw,2.6rem)">
+  <div class="contact">
+    <h2 style="font-size:var(--fs-h2);margin-bottom:1.4rem">Wyślij zapytanie</h2>
+    <form class="form" data-demo data-reveal>
+      <div class="row">
+        <div class="field"><label for="n">Imię i nazwisko</label><input id="n" name="name" type="text" autocomplete="name" required></div>
+        <div class="field"><label for="t">Telefon</label><input id="t" name="phone" type="tel" autocomplete="tel" required></div>
+      </div>
+      <div class="field"><label for="e">E-mail</label><input id="e" name="email" type="email" autocomplete="email"></div>
+      <div class="field"><label for="ty">Typ zabudowy</label>
+        <select id="ty" name="type"><option>Skrzynia / firanka</option><option>Kontener</option><option>Izoterma / chłodnia</option><option>Wywrotka</option><option>Laweta / platforma</option><option>Zabudowa warsztatowa</option><option>Inna</option></select>
+      </div>
+      <div class="field"><label for="m">Wiadomość</label><textarea id="m" name="message" placeholder="Podwozie, ładunek, terminy, dodatkowe wyposażenie…" required></textarea></div>
+      <button class="btn btn--lg" type="submit">Wyślij zapytanie</button>
+      <p class="form__status form__note" role="status" aria-live="polite"></p>
+      <p class="form__note">Dane kontaktowe i wysyłka formularza do uzupełnienia po stronie klienta.</p>
+    </form>
+  </div>
+</section>
+
+<section class="panel panel--gray" style="padding-top:0">
+  <div class="panel__inner">
+    <div class="ph" data-reveal style="aspect-ratio:21/7;border-radius:var(--radius-lg)"><span class="ph__tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Mapa dojazdu — do osadzenia</span></div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__cols">
+      <div class="footer__col footer__brand"><svg class="brand__logo" viewBox="0 0 312 64" aria-hidden="true"><circle cx="31" cy="32" r="29" fill="#f7a30f"/><text x="31" y="42" text-anchor="middle" font-family="Hanken Grotesk, Arial, sans-serif" font-weight="900" font-size="29" fill="#fff">MW</text><text x="70" y="42" font-family="Hanken Grotesk, Arial, sans-serif" font-weight="800" font-size="27" letter-spacing="-0.4"><tspan fill="#f7a30f">MOTO</tspan><tspan fill="currentColor" dx="6">WEKTOR</tspan></text></svg><p>Moto Wektor Sp. z o.o.<br>Producent zabudów do aut dostawczych do 3,5 t. Bielsko-Biała, od 2008 roku.</p></div>
+      <div class="footer__col"><h5>Kontakt</h5><a href="tel:+48334832081">+48 33 483 20 81</a><a href="tel:+48602409830">+48 602 409 830 (handlowy)</a><a href="mailto:biuro@motowektor.pl">biuro@motowektor.pl</a></div>
+      <div class="footer__col"><h5>Adres</h5><p>ul. Poligonowa 35<br>43-300 Bielsko-Biała</p></div>
+      <div class="footer__col"><h5>Godziny</h5><p>Handlowy: pon–pt 8:00–16:00</p><p>Serwis: pon–pt 7:00–15:00</p></div>
+      <div class="footer__col"><h5>Zabudowy</h5><a href="oferta.html#skrzynie">Skrzynie i firanki</a><a href="oferta.html#kontenery">Kontenery</a><a href="oferta.html#izotermy">Izotermy i chłodnie</a><a href="oferta.html#wywrotki">Wywrotki i lawety</a><a href="oferta.html#warsztatowe">Zabudowy warsztatowe</a></div>
+    </div>
+    <div class="footer__bottom"><span>© <span data-year>2026</span> Moto Wektor Sp. z o.o. · NIP 553-242-04-03 · REGON 240936974</span><nav class="footer__legal"><a href="https://facebook.com/motowektor" target="_blank" rel="noopener">Facebook</a><a href="https://instagram.com/motowektor" target="_blank" rel="noopener">Instagram</a><a href="https://www.youtube.com/@motowektorsp.zo.o.5244" target="_blank" rel="noopener">YouTube</a></nav></div>
+  </div>
+</footer>
+
+<script src="assets/js/lenis.min.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
