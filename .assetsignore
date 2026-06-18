@@ -1,0 +1,9 @@
+# Pliki, których NIE trzeba serwować jako część strony (Workers Static Assets)
+wrangler.jsonc
+.assetsignore
+.gitignore
+.gitattributes
+.nojekyll
+*.md
+assets/img/_pool/
+assets/video/source/

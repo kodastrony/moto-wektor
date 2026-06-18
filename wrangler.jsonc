@@ -1,0 +1,9 @@
+{
+  // Cloudflare Workers — serwowanie statycznej strony (bez buildu, bez skryptu Workera).
+  // Deploy: `npx wrangler deploy`  |  Build command: (puste)
+  "name": "moto-wektor",
+  "compatibility_date": "2025-01-01",
+  "assets": {
+    "directory": "."
+  }
+}
