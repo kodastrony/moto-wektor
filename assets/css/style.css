@@ -195,6 +195,8 @@ html.js .vhero__inner > *:nth-child(4) { animation-delay: 0.48s; }
 .feature { padding: clamp(2.4rem, 5vw, 3.6rem) var(--gutter); border-top: 1px solid var(--line); }
 .feature__inner { max-width: var(--maxw); margin-inline: auto; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.6rem, 4vw, 3.4rem); align-items: center; }
 .feature:nth-child(even) .feature__text { order: 2; }
+/* Sekcja oferty bez zdjęcia — pojedyncza kolumna tekstu */
+.feature--text .feature__inner { grid-template-columns: 1fr; max-width: 820px; }
 .feature__media .ph { aspect-ratio: 4/3; border-radius: var(--radius); }
 .feature__media img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--radius); display: block; }
 /* Zdjęcie produktowe (pojazd na białym tle — bez przycinania) */
