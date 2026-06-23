@@ -337,7 +337,7 @@
   })();
 
   /* ---- 8. Płynne przewijanie (Lenis, jeśli dostępne i bez reduced-motion) ---- */
-  if (!reduceMotion && window.Lenis) {
+  if (!reduceMotion && window.Lenis && !document.body.classList.contains("home")) {
     const lenis = new window.Lenis({ duration: 1.05, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
     function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
     requestAnimationFrame(raf);

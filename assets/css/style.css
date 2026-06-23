@@ -406,6 +406,58 @@ html.js .mw-gal .mw-gal__bar { display: block; }
 .real-specs__v { color: var(--ink); font-weight: 600; text-align: right; }
 @media (max-width: 760px) { .real-detail__info.has-specs { grid-template-columns: 1fr; } }
 
+/* ===== Strona główna w stylu „Tesla”: pełnoekranowe panele + scroll-snap ===== */
+@supports (scroll-snap-type: y mandatory) and (selector(:has(*))) {
+  html:has(body.home) { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+}
+body.home .vhero, body.home .hpanel, body.home .footer { scroll-snap-align: start; }
+
+.hpanel { position: relative; min-height: 100svh; overflow: hidden; isolation: isolate; display: grid; }
+.hpanel--light { background: var(--gray); color: var(--ink); }
+.hpanel--dark { background: #161617; color: #fff; }
+.hpanel--dark h2 { color: #fff; }
+
+.hpanel__media { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.hpanel__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hpanel__media--ph { display: grid; place-items: center; background: var(--gray); }
+.hpanel--dark .hpanel__media--ph { background: #1c1c1f; }
+.hpanel__phtag { position: absolute; right: clamp(0.8rem, 2vw, 1.4rem); bottom: clamp(0.8rem, 2vw, 1.4rem); z-index: 1; font-size: var(--fs-xs); letter-spacing: 0.02em; color: var(--muted); background: rgba(255,255,255,0.72); border: 1px dashed var(--line); padding: 0.35rem 0.7rem; border-radius: 6px; }
+.hpanel--dark .hpanel__phtag { color: rgba(255,255,255,0.62); background: rgba(0,0,0,0.34); border-color: rgba(255,255,255,0.24); }
+
+.hpanel__overlay { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(0,0,0,0.20), rgba(0,0,0,0) 24%, rgba(0,0,0,0) 64%, rgba(0,0,0,0.26)); }
+.hpanel--light .hpanel__overlay { background: none; }
+
+.hpanel__content { position: relative; z-index: 2; align-self: start; justify-self: center; text-align: center; padding: clamp(5.5rem, 14vh, 10rem) var(--gutter) 0; max-width: 46rem; }
+.hpanel__eyebrow { font-family: var(--font-head); font-size: var(--fs-xs); font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.78; margin-bottom: 0.7rem; }
+.hpanel__content h2 { font-size: clamp(2.1rem, 5.2vw, 3.8rem); line-height: 1.05; }
+.hpanel__sub { font-size: var(--fs-lead); margin-top: 0.85rem; max-width: 38ch; margin-inline: auto; opacity: 0.92; }
+
+.hpanel__cta { position: absolute; z-index: 2; left: 0; right: 0; bottom: clamp(2.4rem, 7vh, 4.8rem); display: flex; gap: 0.9rem; flex-wrap: wrap; justify-content: center; padding-inline: var(--gutter); }
+.btn-pill { flex: 0 1 220px; min-width: 180px; display: inline-flex; align-items: center; justify-content: center; text-align: center; padding: 0.92rem 1.5rem; border-radius: 999px; font-family: var(--font-head); font-weight: 600; font-size: 0.96rem; transition: background var(--t), color var(--t), transform var(--t) var(--ease), border-color var(--t); }
+.btn-pill:hover { transform: translateY(-2px); }
+.btn-pill--solid { background: var(--ink); color: #fff; }
+.btn-pill--solid:hover { background: #000; }
+.btn-pill--ghost { background: rgba(255,255,255,0.66); color: var(--ink); border: 1px solid rgba(0,0,0,0.08); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.btn-pill--ghost:hover { background: #fff; }
+.hpanel--dark .btn-pill--solid { background: #fff; color: var(--ink); }
+.hpanel--dark .btn-pill--solid:hover { background: #e6e6e9; }
+.hpanel--dark .btn-pill--ghost { background: rgba(40,40,44,0.5); color: #fff; border-color: rgba(255,255,255,0.4); }
+.hpanel--dark .btn-pill--ghost:hover { background: rgba(60,60,66,0.85); }
+
+.hpanel__scrollcue { position: absolute; left: 50%; bottom: 1.4rem; z-index: 2; transform: translateX(-50%); width: 26px; height: 26px; opacity: 0.7; }
+.hpanel__scrollcue svg { width: 100%; height: 100%; animation: vheroBob 1.9s var(--ease) infinite; }
+
+/* Footer jako spokojny, ostatni panel strony głównej */
+body.home .footer { min-height: 100svh; display: grid; align-items: center; }
+
+@media (max-width: 540px) {
+  .hpanel__cta { flex-direction: column; align-items: center; }
+  .btn-pill { width: min(86vw, 330px); flex: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  @supports (scroll-snap-type: y mandatory) { html:has(body.home) { scroll-snap-type: none; scroll-behavior: auto; } }
+}
+
 /* ---------- 13. Footer (ciemny, z danymi firmy) ---------- */
 .footer { background: var(--footer-bg); color: var(--muted-dark); font-size: var(--fs-sm); line-height: 1.6; }
 .footer__inner { max-width: var(--maxw-wide); margin-inline: auto; padding: clamp(2.6rem, 5vw, 4rem) var(--gutter) 2rem; }
