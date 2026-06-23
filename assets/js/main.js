@@ -56,6 +56,29 @@
   if (menu) menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
 
+  /* ---- 2b. Menu „Odkrywaj" (dropdown w nawigacji) ---- */
+  document.querySelectorAll(".nav__more").forEach((more) => {
+    const btn = more.querySelector(".nav__more-btn");
+    if (!btn) return;
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const open = more.classList.toggle("is-open");
+      btn.setAttribute("aria-expanded", String(open));
+    });
+    more.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") { more.classList.remove("is-open"); btn.setAttribute("aria-expanded", "false"); btn.focus(); }
+    });
+  });
+  document.addEventListener("click", (e) => {
+    document.querySelectorAll(".nav__more.is-open").forEach((more) => {
+      if (!more.contains(e.target)) {
+        more.classList.remove("is-open");
+        const b = more.querySelector(".nav__more-btn");
+        if (b) b.setAttribute("aria-expanded", "false");
+      }
+    });
+  });
+
   /* ---- 3. Reveal przy scrollu (IntersectionObserver) ---- */
   const revealEls = document.querySelectorAll("[data-reveal], [data-reveal-stagger]");
   if (revealEls.length) {

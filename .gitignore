@@ -6,3 +6,6 @@ desktop.ini
 
 # Lokalne narzędzia Claude Code
 .claude/
+
+# Tymczasowe (scraping realizacji – w toku)
+_scrape/

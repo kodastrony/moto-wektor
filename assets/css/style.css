@@ -65,39 +65,59 @@ ul { list-style: none; padding: 0; }
 h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; letter-spacing: -0.018em; line-height: 1.1; color: var(--ink); text-wrap: balance; }
 p { text-wrap: pretty; }
 
-/* ---------- 3. Górny pasek kontaktu (część spójnego jasnego nagłówka) ---------- */
-.utilbar { background: var(--header-bg); color: var(--muted); font-size: var(--fs-sm); }
-.utilbar__inner { max-width: var(--maxw-wide); margin-inline: auto; padding-inline: var(--gutter);
-  min-height: 38px; display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-  border-bottom: 1px solid var(--line); }
-.utilbar__contact { display: flex; gap: clamp(0.8rem, 2vw, 1.6rem); flex-wrap: wrap; align-items: center; }
-.utilbar__contact a { color: var(--ink-2); transition: color var(--t); }
-.utilbar__contact a:hover { color: var(--ink); }
-.utilbar__contact strong { color: var(--ink); font-weight: 600; }
-.utilbar__hours { color: var(--muted); }
+/* ---------- 3–4. Nawigacja premium („Tesla-like”): jasny, czysty, minimalistyczny top ----------
+   Pasek kontaktu (utilbar) usunięty z układu — dane przeniesione do menu i stopki. */
+.utilbar { display: none; }
 
-/* ---------- 4. Nawigacja (jasna, spójna z paskiem kontaktu) ---------- */
-.nav { position: sticky; top: 0; z-index: 100; height: var(--nav-h); background: var(--header-bg); border-bottom: 1px solid var(--line); transition: box-shadow var(--t); }
-.nav.is-scrolled { box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 8px 24px -18px rgba(0,0,0,0.25); }
-.nav__inner { max-width: var(--maxw-wide); height: 100%; margin-inline: auto; padding-inline: var(--gutter); display: flex; align-items: center; gap: clamp(1rem, 3vw, 2.4rem); }
+.nav { position: sticky; top: 0; z-index: 100; height: var(--nav-h); background: rgba(255,255,255,0.82); -webkit-backdrop-filter: saturate(150%) blur(16px); backdrop-filter: saturate(150%) blur(16px); border-bottom: 1px solid var(--line); transition: background var(--t), border-color var(--t), box-shadow var(--t); }
+.nav.is-scrolled { box-shadow: 0 8px 30px -22px rgba(0,0,0,0.4); }
+.nav__inner { max-width: var(--maxw-wide); height: 100%; margin-inline: auto; padding-inline: var(--gutter); display: flex; align-items: center; gap: clamp(0.8rem, 2.4vw, 2rem); }
 .nav__logo { flex: none; display: flex; align-items: center; }
-.nav__logo .brand__logo { height: 30px; width: auto; color: var(--ink); }
-.nav__menu { display: flex; align-items: center; gap: clamp(0.9rem, 2vw, 1.9rem); margin-right: auto; }
-.nav__menu a { font-size: var(--fs-sm); font-weight: 600; color: var(--ink); padding: 0.3rem 0; border-bottom: 2px solid transparent; transition: border-color var(--t); }
-.nav__menu a:hover { border-bottom-color: var(--line); }
-.nav__menu a[aria-current="page"] { border-bottom-color: var(--ink); }
-.nav__cta { flex: none; font-size: var(--fs-sm); font-weight: 700; color: #fff; background: var(--ink); padding: 0.55rem 1.1rem; border-radius: 6px; transition: background var(--t); }
-.nav__cta:hover { background: #000; }
-.menu-toggle { display: none; width: 42px; height: 42px; flex-direction: column; gap: 5px; justify-content: center; align-items: center; border: 1px solid var(--line); border-radius: 6px; }
-.menu-toggle span { width: 20px; height: 2px; background: var(--ink); }
+.nav__logo .brand__logo { height: 28px; width: auto; color: var(--ink); transition: color var(--t); }
+.nav__menu { display: flex; align-items: center; gap: clamp(0.3rem, 1.2vw, 0.9rem); margin-right: auto; }
+.nav__menu > a, .nav__more-btn { display: inline-flex; align-items: center; gap: 0.32rem; font: inherit; font-size: var(--fs-sm); font-weight: 600; line-height: 1; color: var(--ink); background: transparent; border: 0; padding: 0.5rem 0.75rem; border-radius: 8px; cursor: pointer; transition: background var(--t), color var(--t); }
+.nav__menu > a:hover, .nav__more-btn:hover { background: rgba(22,22,23,0.06); }
+.nav__menu > a[aria-current="page"] { background: rgba(22,22,23,0.07); }
 
-/* Menu mobilne */
-.mobile-menu { position: fixed; inset: 0; z-index: 110; background: var(--white); padding: 1.4rem var(--gutter); transform: translateX(100%); transition: transform var(--t) var(--ease); visibility: hidden; }
+/* „Odkrywaj” — rozwijane menu drugorzędne */
+.nav__more { position: relative; }
+.nav__more-btn::after { content: ""; width: 6px; height: 6px; margin-left: 0.1rem; border-right: 1.7px solid currentColor; border-bottom: 1.7px solid currentColor; transform: rotate(45deg) translateY(-1px); opacity: 0.65; transition: transform var(--t) var(--ease); }
+.nav__more-btn[aria-expanded="true"]::after { transform: rotate(-135deg) translateY(2px); }
+.nav__drop { position: absolute; top: calc(100% + 9px); left: 50%; min-width: 210px; transform: translateX(-50%) translateY(-8px); background: #fff; border: 1px solid var(--line); border-radius: 13px; box-shadow: 0 28px 64px -30px rgba(0,0,0,0.45); padding: 0.45rem; display: grid; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity var(--t) var(--ease), transform var(--t) var(--ease); }
+.nav__more.is-open .nav__drop, .nav__more:focus-within .nav__drop { opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+@media (hover: hover) { .nav__more:hover .nav__drop { opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0); } }
+.nav__drop a { font-size: var(--fs-sm); font-weight: 600; color: var(--ink); padding: 0.66rem 0.85rem; border-radius: 9px; transition: background var(--t); }
+.nav__drop a:hover, .nav__drop a[aria-current="page"] { background: var(--gray); }
+
+.nav__cta { flex: none; font-size: var(--fs-sm); font-weight: 700; color: #fff; background: var(--ink); padding: 0.6rem 1.2rem; border-radius: 999px; transition: background var(--t), color var(--t), transform var(--t) var(--ease), border-color var(--t); }
+.nav__cta:hover { background: #000; transform: translateY(-1px); }
+.menu-toggle { display: none; width: 42px; height: 42px; flex-direction: column; gap: 5px; justify-content: center; align-items: center; border-radius: 9px; background: transparent; }
+.menu-toggle span { width: 21px; height: 2px; background: var(--ink); border-radius: 2px; transition: background var(--t); }
+
+/* Nawigacja przezroczysta nad wideo-hero (strona główna) */
+body.home .nav { position: fixed; left: 0; right: 0; background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom-color: transparent; }
+body.home .vhero { min-height: 100svh; }
+body.home .nav:not(.is-scrolled) .nav__logo .brand__logo,
+body.home .nav:not(.is-scrolled) .nav__menu > a,
+body.home .nav:not(.is-scrolled) .nav__more-btn { color: #fff; }
+body.home .nav:not(.is-scrolled) .nav__menu > a:hover,
+body.home .nav:not(.is-scrolled) .nav__more-btn:hover,
+body.home .nav:not(.is-scrolled) .nav__menu > a[aria-current="page"] { background: rgba(255,255,255,0.18); }
+body.home .nav:not(.is-scrolled) .menu-toggle span { background: #fff; }
+body.home .nav:not(.is-scrolled) .nav__cta { background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.55); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+body.home .nav:not(.is-scrolled) .nav__cta:hover { background: #fff; color: var(--ink); border-color: #fff; }
+body.home .nav.is-scrolled { background: rgba(255,255,255,0.82); -webkit-backdrop-filter: saturate(150%) blur(16px); backdrop-filter: saturate(150%) blur(16px); border-bottom-color: var(--line); }
+
+/* Menu mobilne (pełny overlay) */
+.mobile-menu { position: fixed; inset: 0; z-index: 110; background: var(--white); padding: 1.4rem var(--gutter) 2rem; transform: translateX(100%); transition: transform var(--t) var(--ease); visibility: hidden; overflow-y: auto; }
 .mobile-menu.is-open { transform: translateX(0); visibility: visible; }
-.mobile-menu nav { display: grid; margin-top: 3rem; }
-.mobile-menu a { font-family: var(--font-head); font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); padding: 1.1rem 0; border-bottom: 1px solid var(--line); }
-.mobile-menu .idx { display: none; }
-.mobile-menu__close { position: absolute; top: 1rem; right: var(--gutter); width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 6px; }
+.mobile-menu nav { display: grid; margin-top: 3.4rem; }
+.mobile-menu a { font-family: var(--font-head); font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); padding: 1rem 0; border-bottom: 1px solid var(--line); }
+.mobile-menu__contact { margin-top: 1.7rem; display: grid; gap: 0.45rem; font-size: var(--fs-sm); color: var(--muted); }
+.mobile-menu__contact a { color: var(--ink); font-weight: 600; }
+.mobile-menu__close { position: absolute; top: 1rem; right: var(--gutter); width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 9px; }
+
+@media (max-width: 860px) { .nav__menu, .nav__cta { display: none; } .menu-toggle { display: flex; } }
 
 /* ---------- 5. Panele (wyrównane do lewej) ---------- */
 .panel { padding: clamp(3.4rem, 7vw, 6rem) var(--gutter); position: relative; }
@@ -357,6 +377,34 @@ html.js .mw-gal .mw-gal__bar { display: block; }
   .contact-layout { grid-template-columns: 1fr; }
   .map-embed { aspect-ratio: 4 / 3; }
 }
+
+/* ---------- Realizacje: siatka kart ---------- */
+.real-grid { max-width: var(--maxw); margin-inline: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: clamp(1rem, 2.4vw, 1.6rem); }
+.real-card { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease), border-color var(--t); }
+.real-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px -24px rgba(0,0,0,0.42); border-color: #c8c8cc; }
+.real-card__media { aspect-ratio: 4 / 3; background: #fff; display: grid; place-items: center; overflow: hidden; border-bottom: 1px solid var(--line); }
+.real-card__media img { width: 100%; height: 100%; object-fit: contain; padding: 0.6rem; transition: transform 600ms var(--ease); }
+.real-card:hover .real-card__media img { transform: scale(1.04); }
+.real-card__body { padding: 0.9rem 1rem 1.05rem; display: flex; flex-direction: column; gap: 0.35rem; flex: 1; }
+.real-card__body h3 { font-family: var(--font-head); font-size: var(--fs-body); font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; color: var(--ink); }
+.real-card__meta { margin-top: auto; padding-top: 0.4rem; font-size: var(--fs-sm); color: var(--muted); display: inline-flex; align-items: center; gap: 0.4rem; }
+.real-card__meta svg { width: 1em; height: 1em; }
+
+/* ---------- Realizacja: strona szczegółów ---------- */
+.real-detail { max-width: var(--maxw); margin-inline: auto; }
+.real-back { display: inline-flex; align-items: center; gap: 0.45rem; font-size: var(--fs-sm); color: var(--muted); margin-bottom: 1rem; }
+.real-back:hover { color: var(--ink); }
+.real-back svg { width: 1.05em; height: 1.05em; }
+.mw-gal--detail .mw-gal__stage { aspect-ratio: 3 / 2; }
+.real-detail__info { margin-top: clamp(1.4rem, 3vw, 2.2rem); }
+.real-detail__info.has-specs { display: grid; grid-template-columns: 1.5fr 1fr; gap: clamp(1.4rem, 4vw, 3rem); align-items: start; }
+.real-detail__desc p { font-size: var(--fs-lead); color: var(--muted); line-height: 1.62; max-width: 68ch; }
+.real-specs { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; align-self: start; }
+.real-specs__row { display: flex; justify-content: space-between; gap: 1rem; padding: 0.8rem 1rem; font-size: var(--fs-sm); }
+.real-specs__row + .real-specs__row { border-top: 1px solid var(--line); }
+.real-specs__k { color: var(--muted); }
+.real-specs__v { color: var(--ink); font-weight: 600; text-align: right; }
+@media (max-width: 760px) { .real-detail__info.has-specs { grid-template-columns: 1fr; } }
 
 /* ---------- 13. Footer (ciemny, z danymi firmy) ---------- */
 .footer { background: var(--footer-bg); color: var(--muted-dark); font-size: var(--fs-sm); line-height: 1.6; }
