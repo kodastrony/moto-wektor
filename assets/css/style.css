@@ -437,12 +437,18 @@ body.home .vhero, body.home .hpanel, body.home .footer { scroll-snap-align: star
 .btn-pill:hover { transform: translateY(-2px); }
 .btn-pill--solid { background: var(--ink); color: #fff; }
 .btn-pill--solid:hover { background: #000; }
-.btn-pill--ghost { background: rgba(255,255,255,0.66); color: var(--ink); border: 1px solid rgba(0,0,0,0.08); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.btn-pill--ghost { background: rgba(255,255,255,0.7); color: var(--ink); border: 1px solid var(--line); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
 .btn-pill--ghost:hover { background: #fff; }
 .hpanel--dark .btn-pill--solid { background: #fff; color: var(--ink); }
 .hpanel--dark .btn-pill--solid:hover { background: #e6e6e9; }
 .hpanel--dark .btn-pill--ghost { background: rgba(40,40,44,0.5); color: #fff; border-color: rgba(255,255,255,0.4); }
 .hpanel--dark .btn-pill--ghost:hover { background: rgba(60,60,66,0.85); }
+
+/* Panel „product" — pojazd na białym tle (jak strona modelu) */
+.hpanel--product { background: #fff; color: var(--ink); }
+.hpanel--product h2 { color: var(--ink); }
+.hpanel__media--product { padding: clamp(6rem, 15vh, 9.5rem) clamp(1rem, 5vw, 3rem) clamp(6.5rem, 15vh, 9rem); display: grid; place-items: center; }
+.hpanel__media--product img { object-fit: contain; width: 100%; height: 100%; }
 
 .hpanel__scrollcue { position: absolute; left: 50%; bottom: 1.4rem; z-index: 2; transform: translateX(-50%); width: 26px; height: 26px; opacity: 0.7; }
 .hpanel__scrollcue svg { width: 100%; height: 100%; animation: vheroBob 1.9s var(--ease) infinite; }
