@@ -81,6 +81,8 @@ p { text-wrap: pretty; }
 
 /* „Odkrywaj” — rozwijane menu drugorzędne */
 .nav__more { position: relative; }
+/* niewidzialny mostek pod „Odkrywaj" — żeby menu nie znikało przy przejściu kursora do listy */
+.nav__more::before { content: ""; position: absolute; left: -8px; right: -8px; top: 100%; height: 16px; }
 .nav__more-btn::after { content: ""; width: 6px; height: 6px; margin-left: 0.1rem; border-right: 1.7px solid currentColor; border-bottom: 1.7px solid currentColor; transform: rotate(45deg) translateY(-1px); opacity: 0.65; transition: transform var(--t) var(--ease); }
 .nav__more-btn[aria-expanded="true"]::after { transform: rotate(-135deg) translateY(2px); }
 .nav__drop { position: absolute; top: calc(100% + 9px); left: 50%; min-width: 210px; transform: translateX(-50%) translateY(-8px); background: #fff; border: 1px solid var(--line); border-radius: 13px; box-shadow: 0 28px 64px -30px rgba(0,0,0,0.45); padding: 0.45rem; display: grid; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity var(--t) var(--ease), transform var(--t) var(--ease); }
@@ -406,11 +408,8 @@ html.js .mw-gal .mw-gal__bar { display: block; }
 .real-specs__v { color: var(--ink); font-weight: 600; text-align: right; }
 @media (max-width: 760px) { .real-detail__info.has-specs { grid-template-columns: 1fr; } }
 
-/* ===== Strona główna w stylu „Tesla”: pełnoekranowe panele + scroll-snap ===== */
-@supports (scroll-snap-type: y mandatory) and (selector(:has(*))) {
-  html:has(body.home) { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
-}
-body.home .vhero, body.home .hpanel, body.home .footer { scroll-snap-align: start; }
+/* ===== Strona główna: pełnoekranowe panele, płynne przewijanie (BEZ scroll-snap) ===== */
+html:has(body.home) { scroll-behavior: smooth; }
 
 .hpanel { position: relative; min-height: 100svh; overflow: hidden; isolation: isolate; display: grid; }
 .hpanel--light { background: var(--gray); color: var(--ink); }
@@ -444,17 +443,23 @@ body.home .vhero, body.home .hpanel, body.home .footer { scroll-snap-align: star
 .hpanel--dark .btn-pill--ghost { background: rgba(40,40,44,0.5); color: #fff; border-color: rgba(255,255,255,0.4); }
 .hpanel--dark .btn-pill--ghost:hover { background: rgba(60,60,66,0.85); }
 
-/* Panel „product" — pojazd na białym tle (jak strona modelu) */
-.hpanel--product { background: #fff; color: var(--ink); }
+/* Panel „product" — pojazd na białym tle, pokazany W CAŁOŚCI. Układ: nazwa / auto / przyciski */
+.hpanel--product { background: #fff; color: var(--ink); display: grid; grid-template-rows: auto minmax(0, 1fr) auto; align-items: center; justify-items: center; gap: clamp(0.8rem, 2vh, 1.6rem); padding: clamp(5.2rem, 11vh, 7.5rem) var(--gutter) clamp(2.6rem, 6vh, 4.4rem); }
 .hpanel--product h2 { color: var(--ink); }
-.hpanel__media--product { padding: clamp(6rem, 15vh, 9.5rem) clamp(1rem, 5vw, 3rem) clamp(6.5rem, 15vh, 9rem); display: grid; place-items: center; }
-.hpanel__media--product img { object-fit: contain; width: 100%; height: 100%; }
+.hpanel--product .hpanel__content { grid-row: 1; position: static; align-self: end; padding: 0; }
+.hpanel--product .hpanel__media { grid-row: 2; position: static; inset: auto; width: 100%; height: 100%; min-height: 0; padding: 0; display: grid; place-items: center; }
+.hpanel--product .hpanel__media--product img { width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; }
+.hpanel--product .hpanel__cta { grid-row: 3; position: static; transform: none; left: auto; right: auto; bottom: auto; align-self: start; padding-inline: 0; }
+
+/* Panel CTA bez auta (np. Konfigurator) — wyśrodkowany */
+.hpanel--light { place-content: center; justify-items: center; gap: clamp(1.1rem, 3vh, 2rem); padding: clamp(5rem, 10vh, 8rem) var(--gutter); }
+.hpanel--light .hpanel__content { position: static; align-self: auto; padding: 0; }
+.hpanel--light .hpanel__cta { position: static; transform: none; left: auto; right: auto; bottom: auto; padding-inline: 0; }
 
 .hpanel__scrollcue { position: absolute; left: 50%; bottom: 1.4rem; z-index: 2; transform: translateX(-50%); width: 26px; height: 26px; opacity: 0.7; }
 .hpanel__scrollcue svg { width: 100%; height: 100%; animation: vheroBob 1.9s var(--ease) infinite; }
 
-/* Footer jako spokojny, ostatni panel strony głównej */
-body.home .footer { min-height: 100svh; display: grid; align-items: center; }
+/* footer na home: normalna wysokość (bez wymuszania pełnego ekranu) */
 
 @media (max-width: 540px) {
   .hpanel__cta { flex-direction: column; align-items: center; }
